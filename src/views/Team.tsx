@@ -1,9 +1,11 @@
 import { Avatar, Card, Progress } from '../components/ui'
 import { EngineerValueChart, EngineerWorkloadChart } from '../components/charts'
-import { engineerStats, fmtMn } from '../data/opportunities'
+import { fmtMn } from '../data/opportunities'
+import { useDataScope } from '../data/DataScopeContext'
 
 export default function Team() {
-  const stats = engineerStats().sort((a, b) => b.totalValue - a.totalValue)
+  const { engineers } = useDataScope()
+  const stats = [...engineers].sort((a, b) => b.totalValue - a.totalValue)
   const maxValue = Math.max(...stats.map((s) => s.totalValue), 1)
 
   return (

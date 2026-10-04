@@ -4,7 +4,7 @@ import Overview from './views/Overview'
 import Pipeline from './views/Pipeline'
 import Team from './views/Team'
 import Insights from './views/Insights'
-import { COVERAGE } from './data/opportunities'
+import { DataScopeProvider, ScopeToggle, useDataScope } from './data/DataScopeContext'
 
 type View = 'overview' | 'pipeline' | 'team' | 'insights'
 
@@ -15,9 +15,10 @@ const NAV: { id: View; label: string; icon: React.ReactNode; title: string }[] =
   { id: 'insights', label: 'Analytics', icon: <BarChart3 size={16} strokeWidth={1.75} />, title: 'Analytics' },
 ]
 
-export default function App() {
+function AppShell() {
   const [view, setView] = useState<View>('overview')
   const [menuOpen, setMenuOpen] = useState(false)
+  const { coverage, scope, stats } = useDataScope()
   const active = NAV.find((n) => n.id === view)!
 
   useEffect(() => {
@@ -78,7 +79,8 @@ export default function App() {
           <p className="flex items-center gap-1 text-[11px] font-medium text-slate-500">
             <Lock size={10} aria-hidden /> Confidential
           </p>
-          <p className="mt-0.5 text-[11px] text-slate-400">{COVERAGE}</p>
+          <p className="mt-0.5 text-[11px] text-slate-400">{coverage}</p>
+          <p className="mt-0.5 text-[11px] text-slate-400">{stats.total} records · {scope}</p>
         </div>
       </aside>
 
@@ -92,9 +94,12 @@ export default function App() {
             <Menu size={18} />
           </button>
           <h1 className="text-[14px] font-semibold text-slate-900">{active.title}</h1>
+          <div className="ml-auto">
+            <ScopeToggle />
+          </div>
         </header>
 
-        <main id="main" className="flex-1 px-3 py-4 sm:px-5" key={view} tabIndex={-1}>
+        <main id="main" className="flex-1 px-3 py-4 sm:px-5" key={`${view}-${scope}`} tabIndex={-1}>
           {view === 'overview' && <Overview onOpenPipeline={() => setView('pipeline')} />}
           {view === 'pipeline' && <Pipeline />}
           {view === 'team' && <Team />}
@@ -102,9 +107,17 @@ export default function App() {
         </main>
 
         <footer className="border-t border-slate-200 px-3 py-2 text-[11px] text-slate-400 sm:px-5">
-          Values in Mn LKR · NI = no information
+          Values in Mn LKR · NI = no information · Default view: Overall records
         </footer>
       </div>
     </div>
+  )
+}
+
+export default function App() {
+  return (
+    <DataScopeProvider>
+      <AppShell />
+    </DataScopeProvider>
   )
 }

@@ -1,9 +1,10 @@
 import { Card } from '../components/ui'
 import { DataQualityChart, EngineerValueChart, EngineerWorkloadChart, TeamSplitChart } from '../components/charts'
-import { fmtMn, summary } from '../data/opportunities'
+import { fmtMn } from '../data/opportunities'
+import { useDataScope } from '../data/DataScopeContext'
 
 export default function Insights() {
-  const s = summary()
+  const { stats: s, scope } = useDataScope()
   const dimoShare = s.projectedPipeline
     ? Math.round((2000 / s.projectedPipeline) * 100)
     : 0
@@ -13,15 +14,23 @@ export default function Insights() {
       <section className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <SummaryTile
           label="Summary"
-          body={`Week 28 Sep–4 Oct: projected pipeline ${fmtMn(s.projectedPipeline)} Mn across ${s.total} opportunities. Bids dispatched ${fmtMn(s.submittedValue)} Mn (Hellman MAS).`}
+          body={
+            scope === 'weekly'
+              ? `This week: projected pipeline ${fmtMn(s.projectedPipeline)} Mn across ${s.total} opportunities. Bids dispatched ${fmtMn(s.submittedValue)} Mn.`
+              : `Overall record: ${s.total} opportunities · projected ${fmtMn(s.projectedPipeline)} Mn · bids ${fmtMn(s.submittedValue)} Mn · ${s.pending.length} still pending.`
+          }
         />
         <SummaryTile
           label="Risks"
-          body={`DIMO-EDL is ~${dimoShare}% of projected pipeline. ${s.pending.length} deals still open. Win/loss not logged on submitted bids.`}
+          body={
+            scope === 'weekly'
+              ? `DIMO-EDL is ~${dimoShare}% of this week’s projected pipeline. ${s.pending.length} deals still open.`
+              : `${s.stale.length} stale deals need reconfirmation. Concentration risk on large CICS opportunities (DIMO / NSBM).`
+          }
         />
         <SummaryTile
           label="Required data"
-          body={`Win ratio needs Won/Lost on ${s.submitted.length} bid(s). ${s.unsized.length} of ${s.total} deals missing a value field where expected.`}
+          body={`Win ratio needs Won/Lost on ${s.submitted.length} submitted bid(s). ${s.unsized.length} of ${s.total} deals still lack a value.`}
         />
       </section>
 
@@ -35,9 +44,9 @@ export default function Insights() {
       <Card className="p-4">
         <h3 className="text-[13px] font-semibold text-slate-900">Recommended actions</h3>
         <ol className="mt-2 list-decimal space-y-1.5 pl-4 text-[13px] text-slate-600">
-          <li>Record Won / Lost and opening price for Hellman MAS (and any other submitted bids).</li>
-          <li>Track BOC SD-WAN toward the 09 Oct submission date.</li>
-          <li>Confirm DIMO-EDL sizing (2 B projected vs 4 B RFP ceiling) before mid-November.</li>
+          <li>Record Won / Lost and opening price for every submitted bid.</li>
+          <li>Reconfirm or close stale opportunities.</li>
+          <li>Track BOC SD-WAN (09 Oct) and DIMO-EDL (19 Nov) submission dates.</li>
         </ol>
       </Card>
     </div>

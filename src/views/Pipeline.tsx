@@ -4,7 +4,8 @@ import {
   Avatar, Card, EmptyState, FieldInput, FieldSelect, NiBadge, SegmentButton, StaleBadge, StatusBadge,
 } from '../components/ui'
 import type { Opportunity, Status, Team } from '../data/opportunities'
-import { OPPORTUNITIES, bestValue, fmtMn, isStale } from '../data/opportunities'
+import { bestValue, fmtMn, isStale } from '../data/opportunities'
+import { useDataScope } from '../data/DataScopeContext'
 
 type ViewMode = 'table' | 'board'
 
@@ -12,17 +13,18 @@ const TEAM_ORDER: Record<Team, number> = { CICS: 0, DWS: 1, NI: 2 }
 const STATUS_ORDER: Record<Status, number> = { Submitted: 0, Ongoing: 1, Assigned: 2, Declined: 3 }
 
 export default function Pipeline() {
+  const { opportunities } = useDataScope()
   const [mode, setMode] = useState<ViewMode>('board')
   const [team, setTeam] = useState('')
   const [status, setStatus] = useState('')
   const [owner, setOwner] = useState('')
   const [query, setQuery] = useState('')
 
-  const owners = useMemo(() => [...new Set(OPPORTUNITIES.map((o) => o.owner))], [])
+  const owners = useMemo(() => [...new Set(opportunities.map((o) => o.owner))], [opportunities])
 
   const rows = useMemo(() => {
     const q = query.toLowerCase().trim()
-    return OPPORTUNITIES.filter(
+    return opportunities.filter(
       (o) =>
         (!team || o.team === team) &&
         (!status || o.status === status) &&
@@ -38,23 +40,22 @@ export default function Pipeline() {
         STATUS_ORDER[a.status] - STATUS_ORDER[b.status] ||
         (a.submissionDate ?? '9999').localeCompare(b.submissionDate ?? '9999'),
     )
-  }, [team, status, owner, query])
+  }, [opportunities, team, status, owner, query])
 
   const pendingN = rows.filter((o) => o.status === 'Assigned' || o.status === 'Ongoing').length
   const doneN = rows.filter((o) => o.status === 'Submitted').length
 
   return (
     <div className="mx-auto max-w-[1280px] space-y-3">
-      <div className="animate-fade-up flex flex-wrap items-center gap-1.5">
-        <span className="rounded-md bg-[#fff6e5] px-2 py-0.5 text-[12px] font-medium text-[#b47a00]">{pendingN} pending</span>
-        <span className="rounded-md bg-[#eaf8f0] px-2 py-0.5 text-[12px] font-medium text-[#1f8a4c]">{doneN} submitted</span>
-        <span className="text-[12px] text-[#8a8f98]">{rows.length} shown</span>
+      <div className="flex flex-wrap items-center gap-1.5">
+        <span className="rounded-md bg-amber-50 px-2 py-0.5 text-[12px] font-medium text-amber-700">{pendingN} pending</span>
+        <span className="rounded-md bg-emerald-50 px-2 py-0.5 text-[12px] font-medium text-emerald-700">{doneN} submitted</span>
+        <span className="text-[12px] text-slate-400">{rows.length} of {opportunities.length} shown</span>
       </div>
 
-      {/* Linear-style toolbar */}
-      <div className="no-print sticky top-12 z-10 flex flex-wrap items-center gap-2 rounded-[10px] border border-[#e8e8e8] bg-white p-1.5">
+      <div className="no-print sticky top-12 z-10 flex flex-wrap items-center gap-2 rounded-lg border border-slate-200 bg-white p-1.5">
         <div className="relative min-w-[140px] flex-1">
-          <Search size={14} className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-[#8a8f98]" aria-hidden />
+          <Search size={14} className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" aria-hidden />
           <FieldInput
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -82,7 +83,7 @@ export default function Pipeline() {
             <option key={o} value={o}>{o}</option>
           ))}
         </FieldSelect>
-        <div className="ml-auto flex overflow-hidden rounded-md border border-[#e8e8e8]" role="group" aria-label="View mode">
+        <div className="ml-auto flex overflow-hidden rounded-md border border-slate-200" role="group" aria-label="View mode">
           <SegmentButton active={mode === 'board'} onClick={() => setMode('board')} aria-pressed={mode === 'board'}>
             <Columns3 size={13} aria-hidden /> Board
           </SegmentButton>

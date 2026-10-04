@@ -8,20 +8,24 @@ import {
   StatusMixChart,
   TeamSplitChart,
 } from '../components/charts'
-import { OPPORTUNITIES, bestValue, fmtMn, isStale, summary } from '../data/opportunities'
+import { bestValue, fmtMn, isStale, type Opportunity } from '../data/opportunities'
+import { useDataScope } from '../data/DataScopeContext'
 
 export default function Overview({ onOpenPipeline }: { onOpenPipeline: () => void }) {
-  const s = summary()
-  const assigned = OPPORTUNITIES.filter((o) => o.status === 'Assigned').length
-  const ongoing = OPPORTUNITIES.filter((o) => o.status === 'Ongoing').length
+  const { opportunities, stats: s, scope } = useDataScope()
+  const assigned = opportunities.filter((o) => o.status === 'Assigned').length
+  const ongoing = opportunities.filter((o) => o.status === 'Ongoing').length
 
   return (
     <div className="mx-auto max-w-[1120px] space-y-5">
-      {/* KPI strip — Salesforce / Stripe density */}
       <section aria-label="Key metrics" className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-slate-200 bg-slate-200 sm:grid-cols-4">
         <Metric label="Pending" value={String(s.pending.length)} hint={`${assigned} assigned · ${ongoing} ongoing`} />
         <Metric label="Submitted" value={String(s.submitted.length)} hint={`${fmtMn(s.submittedValue)} Mn bid value`} accent="text-emerald-700" />
-        <Metric label="Projected pipeline" value={fmtMn(s.projectedPipeline)} hint="Mn LKR · weekly total" />
+        <Metric
+          label="Projected pipeline"
+          value={fmtMn(s.projectedPipeline)}
+          hint={scope === 'weekly' ? 'Mn LKR · this week' : 'Mn LKR · overall'}
+        />
         <Metric label="Win ratio" value="—" hint={`${s.outcomesTracked}/${s.submitted.length} outcomes`} accent="text-red-600" warn />
       </section>
 
@@ -32,7 +36,6 @@ export default function Overview({ onOpenPipeline }: { onOpenPipeline: () => voi
         </p>
       )}
 
-      {/* Charts — decision-useful */}
       <section aria-label="Analytics" className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         <PipelineTrendChart />
         <TeamSplitChart />
@@ -42,10 +45,11 @@ export default function Overview({ onOpenPipeline }: { onOpenPipeline: () => voi
         <DataQualityChart />
       </section>
 
-      {/* Compact stage list */}
       <section aria-label="Stage snapshot">
         <div className="mb-2 flex items-center justify-between">
-          <h2 className="text-[13px] font-semibold text-slate-900">Open deals</h2>
+          <h2 className="text-[13px] font-semibold text-slate-900">
+            {scope === 'weekly' ? 'This week’s deals' : 'All deals'}
+          </h2>
           <button
             type="button"
             onClick={onOpenPipeline}
@@ -55,10 +59,10 @@ export default function Overview({ onOpenPipeline }: { onOpenPipeline: () => voi
           </button>
         </div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          <MiniLane title="Assigned" color="bg-blue-600" items={OPPORTUNITIES.filter((o) => o.status === 'Assigned')} />
-          <MiniLane title="Ongoing" color="bg-amber-500" items={OPPORTUNITIES.filter((o) => o.status === 'Ongoing')} />
-          <MiniLane title="Submitted" color="bg-emerald-600" items={OPPORTUNITIES.filter((o) => o.status === 'Submitted')} />
-          <MiniLane title="Declined" color="bg-red-600" items={OPPORTUNITIES.filter((o) => o.status === 'Declined')} />
+          <MiniLane title="Assigned" color="bg-blue-600" items={opportunities.filter((o) => o.status === 'Assigned')} />
+          <MiniLane title="Ongoing" color="bg-amber-500" items={opportunities.filter((o) => o.status === 'Ongoing')} />
+          <MiniLane title="Submitted" color="bg-emerald-600" items={opportunities.filter((o) => o.status === 'Submitted')} />
+          <MiniLane title="Declined" color="bg-red-600" items={opportunities.filter((o) => o.status === 'Declined')} />
         </div>
       </section>
     </div>
@@ -79,7 +83,7 @@ function Metric({
   )
 }
 
-function MiniLane({ title, color, items }: { title: string; color: string; items: typeof OPPORTUNITIES }) {
+function MiniLane({ title, color, items }: { title: string; color: string; items: Opportunity[] }) {
   const top = items.slice(0, 3)
   return (
     <Card className="p-3">

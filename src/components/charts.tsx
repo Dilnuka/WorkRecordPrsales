@@ -3,9 +3,8 @@ import {
   ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts'
 import type { ReactNode } from 'react'
-import {
-  OPPORTUNITIES, PIPELINE_TREND, bestValue, engineerStats, fmtMn, isStale, summary,
-} from '../data/opportunities'
+import { PIPELINE_TREND, bestValue, fmtMn, isStale } from '../data/opportunities'
+import { useDataScope } from '../data/DataScopeContext'
 
 const AXIS = { fontSize: 11, fill: '#6b7280', fontFamily: 'inherit' }
 const GRID = '#eceef1'
@@ -53,10 +52,9 @@ function ChartShell({ title, subtitle, children }: { title: string; subtitle?: s
   )
 }
 
-/** Weekly projected pipeline — Stripe-style area */
 export function PipelineTrendChart() {
   return (
-    <ChartShell title="Projected pipeline" subtitle="Weekly · Mn LKR">
+    <ChartShell title="Projected pipeline" subtitle="Weekly trend · Mn LKR">
       <ResponsiveContainer width="100%" height={200}>
         <AreaChart data={PIPELINE_TREND} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
           <defs>
@@ -67,13 +65,8 @@ export function PipelineTrendChart() {
           </defs>
           <CartesianGrid strokeDasharray="3 3" stroke={GRID} vertical={false} />
           <XAxis dataKey="week" tick={AXIS} axisLine={false} tickLine={false} />
-          <YAxis
-            tick={AXIS}
-            axisLine={false}
-            tickLine={false}
-            width={44}
-            tickFormatter={(v) => (v >= 1000 ? `${(v / 1000).toFixed(1)}k` : String(v))}
-          />
+          <YAxis tick={AXIS} axisLine={false} tickLine={false} width={44}
+            tickFormatter={(v) => (v >= 1000 ? `${(v / 1000).toFixed(1)}k` : String(v))} />
           <Tooltip
             content={({ active, payload, label }) => {
               const reported = (payload?.[0]?.payload as { reported?: boolean } | undefined)?.reported
@@ -82,10 +75,7 @@ export function PipelineTrendChart() {
                   active={active}
                   label={`${label}${reported === false ? ' (est.)' : ''}`}
                   payload={(payload ?? []).map((p) => ({
-                    value: Number(p.value),
-                    name: 'Pipeline',
-                    color: BLUE,
-                    dataKey: 'value',
+                    value: Number(p.value), name: 'Pipeline', color: BLUE, dataKey: 'value',
                   }))}
                 />
               )
@@ -99,15 +89,15 @@ export function PipelineTrendChart() {
   )
 }
 
-/** CICS vs DWS — pipeline vs submitted bids */
 export function TeamSplitChart() {
+  const { opportunities } = useDataScope()
   const teams = ['CICS', 'DWS'] as const
   const data = teams.map((t) => ({
     team: t,
-    Pipeline: OPPORTUNITIES
+    Pipeline: opportunities
       .filter((o) => o.team === t && (o.status === 'Assigned' || o.status === 'Ongoing'))
       .reduce((s, o) => s + (bestValue(o) ?? 0), 0),
-    Submitted: OPPORTUNITIES
+    Submitted: opportunities
       .filter((o) => o.team === t && o.status === 'Submitted')
       .reduce((s, o) => s + (o.bid ?? 0), 0),
   }))
@@ -130,14 +120,13 @@ export function TeamSplitChart() {
   )
 }
 
-/** Stage mix — donut */
 export function StatusMixChart() {
-  const s = summary()
+  const { opportunities, stats } = useDataScope()
   const data = [
-    { name: 'Assigned', value: OPPORTUNITIES.filter((o) => o.status === 'Assigned').length, color: BLUE },
-    { name: 'Ongoing', value: OPPORTUNITIES.filter((o) => o.status === 'Ongoing').length, color: AMBER },
-    { name: 'Submitted', value: s.submitted.length, color: GREEN },
-    { name: 'Declined', value: s.declined.length, color: RED },
+    { name: 'Assigned', value: opportunities.filter((o) => o.status === 'Assigned').length, color: BLUE },
+    { name: 'Ongoing', value: opportunities.filter((o) => o.status === 'Ongoing').length, color: AMBER },
+    { name: 'Submitted', value: stats.submitted.length, color: GREEN },
+    { name: 'Declined', value: stats.declined.length, color: RED },
   ].filter((d) => d.value > 0)
 
   return (
@@ -153,10 +142,7 @@ export function StatusMixChart() {
                 active={active}
                 unit=""
                 payload={(payload ?? []).map((p) => ({
-                  value: Number(p.value),
-                  name: String(p.name),
-                  color: p.payload?.color,
-                  dataKey: p.name,
+                  value: Number(p.value), name: String(p.name), color: p.payload?.color, dataKey: String(p.name),
                 }))}
               />
             )}
@@ -168,13 +154,13 @@ export function StatusMixChart() {
   )
 }
 
-/** Funnel-style horizontal bars: Assigned → Ongoing → Submitted */
 export function StageFunnelChart() {
+  const { opportunities } = useDataScope()
   const counts = [
-    { stage: 'Assigned', n: OPPORTUNITIES.filter((o) => o.status === 'Assigned').length },
-    { stage: 'Ongoing', n: OPPORTUNITIES.filter((o) => o.status === 'Ongoing').length },
-    { stage: 'Submitted', n: OPPORTUNITIES.filter((o) => o.status === 'Submitted').length },
-    { stage: 'Declined', n: OPPORTUNITIES.filter((o) => o.status === 'Declined').length },
+    { stage: 'Assigned', n: opportunities.filter((o) => o.status === 'Assigned').length },
+    { stage: 'Ongoing', n: opportunities.filter((o) => o.status === 'Ongoing').length },
+    { stage: 'Submitted', n: opportunities.filter((o) => o.status === 'Submitted').length },
+    { stage: 'Declined', n: opportunities.filter((o) => o.status === 'Declined').length },
   ]
   const max = Math.max(...counts.map((c) => c.n), 1)
   const colors = [BLUE, AMBER, GREEN, RED]
@@ -189,10 +175,7 @@ export function StageFunnelChart() {
               <span className="tabular-nums text-slate-500">{c.n}</span>
             </div>
             <div className="h-2 overflow-hidden rounded-full bg-slate-100">
-              <div
-                className="h-full rounded-full transition-all"
-                style={{ width: `${(c.n / max) * 100}%`, background: colors[i] }}
-              />
+              <div className="h-full rounded-full" style={{ width: `${(c.n / max) * 100}%`, background: colors[i] }} />
             </div>
           </div>
         ))}
@@ -201,15 +184,10 @@ export function StageFunnelChart() {
   )
 }
 
-/** Workload: deals worked + bids per engineer */
 export function EngineerWorkloadChart() {
-  const data = engineerStats()
-    .map((e) => ({
-      name: e.name.split(' ')[0],
-      Worked: e.worked,
-      Bids: e.submitted,
-      Pending: e.pending,
-    }))
+  const { engineers } = useDataScope()
+  const data = engineers
+    .map((e) => ({ name: e.name.split(' ')[0], Worked: e.worked, Bids: e.submitted, Pending: e.pending }))
     .sort((a, b) => b.Worked - a.Worked)
 
   return (
@@ -226,10 +204,7 @@ export function EngineerWorkloadChart() {
                 label={String(label)}
                 unit=""
                 payload={(payload ?? []).map((p) => ({
-                  value: Number(p.value),
-                  name: String(p.name),
-                  color: p.color,
-                  dataKey: String(p.dataKey ?? p.name),
+                  value: Number(p.value), name: String(p.name), color: p.color, dataKey: String(p.dataKey ?? p.name),
                 }))}
               />
             )}
@@ -245,9 +220,9 @@ export function EngineerWorkloadChart() {
   )
 }
 
-/** Prospect value by engineer */
 export function EngineerValueChart() {
-  const data = engineerStats()
+  const { engineers } = useDataScope()
+  const data = engineers
     .map((e) => ({ name: e.name.split(' ')[0], value: e.totalValue }))
     .sort((a, b) => b.value - a.value)
 
@@ -265,10 +240,7 @@ export function EngineerValueChart() {
                 active={active}
                 label={String(label)}
                 payload={(payload ?? []).map((p) => ({
-                  value: Number(p.value),
-                  name: 'Value',
-                  color: BLUE,
-                  dataKey: 'value',
+                  value: Number(p.value), name: 'Value', color: BLUE, dataKey: 'value',
                 }))}
               />
             )}
@@ -281,20 +253,20 @@ export function EngineerValueChart() {
   )
 }
 
-/** Data completeness — what % of fields are filled */
 export function DataQualityChart() {
-  const total = OPPORTUNITIES.length
-  const withValue = OPPORTUNITIES.filter((o) => bestValue(o) != null).length
-  const withSales = OPPORTUNITIES.filter((o) => o.sales != null).length
-  const withOutcome = OPPORTUNITIES.filter((o) => o.status === 'Submitted' && o.outcome != null).length
-  const submitted = OPPORTUNITIES.filter((o) => o.status === 'Submitted').length
-  const stale = OPPORTUNITIES.filter(isStale).length
+  const { opportunities } = useDataScope()
+  const total = Math.max(opportunities.length, 1)
+  const withValue = opportunities.filter((o) => bestValue(o) != null).length
+  const withSales = opportunities.filter((o) => o.sales != null).length
+  const withOutcome = opportunities.filter((o) => o.status === 'Submitted' && o.outcome != null).length
+  const submitted = opportunities.filter((o) => o.status === 'Submitted').length
+  const stale = opportunities.filter(isStale).length
 
   const rows = [
-    { label: 'Has value estimate', pct: Math.round((withValue / total) * 100), note: `${withValue}/${total}` },
-    { label: 'Has salesperson', pct: Math.round((withSales / total) * 100), note: `${withSales}/${total}` },
+    { label: 'Has value estimate', pct: Math.round((withValue / total) * 100), note: `${withValue}/${opportunities.length}` },
+    { label: 'Has salesperson', pct: Math.round((withSales / total) * 100), note: `${withSales}/${opportunities.length}` },
     { label: 'Bid outcome logged', pct: submitted ? Math.round((withOutcome / submitted) * 100) : 0, note: `${withOutcome}/${submitted}` },
-    { label: 'Fresh (not stale)', pct: Math.round(((total - stale) / total) * 100), note: `${total - stale}/${total}` },
+    { label: 'Fresh (not stale)', pct: Math.round(((opportunities.length - stale) / total) * 100), note: `${opportunities.length - stale}/${opportunities.length}` },
   ]
 
   return (
@@ -307,13 +279,10 @@ export function DataQualityChart() {
               <span className="tabular-nums text-slate-500">{r.pct}% · {r.note}</span>
             </div>
             <div className="h-2 overflow-hidden rounded-full bg-slate-100">
-              <div
-                className="h-full rounded-full"
-                style={{
-                  width: `${r.pct}%`,
-                  background: r.pct < 40 ? RED : r.pct < 70 ? AMBER : GREEN,
-                }}
-              />
+              <div className="h-full rounded-full" style={{
+                width: `${r.pct}%`,
+                background: r.pct < 40 ? RED : r.pct < 70 ? AMBER : GREEN,
+              }} />
             </div>
           </div>
         ))}
