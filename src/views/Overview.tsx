@@ -21,7 +21,7 @@ export default function Overview({ onOpenPipeline }: { onOpenPipeline: () => voi
       <section aria-label="Key metrics" className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-slate-200 bg-slate-200 sm:grid-cols-4">
         <Metric label="Pending" value={String(s.pending.length)} hint={`${assigned} assigned · ${ongoing} ongoing`} />
         <Metric label="Submitted" value={String(s.submitted.length)} hint={`${fmtMn(s.submittedValue)} Mn bid value`} accent="text-emerald-700" />
-        <Metric label="Active pipeline" value={fmtMn(s.pipelineValue)} hint="Mn LKR · live deals" />
+        <Metric label="Projected pipeline" value={fmtMn(s.projectedPipeline)} hint="Mn LKR · weekly total" />
         <Metric label="Win ratio" value="—" hint={`${s.outcomesTracked}/${s.submitted.length} outcomes`} accent="text-red-600" warn />
       </section>
 
