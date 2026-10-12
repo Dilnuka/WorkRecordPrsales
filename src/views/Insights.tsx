@@ -1,12 +1,14 @@
 import { Card } from '../components/ui'
 import { DataQualityChart, EngineerValueChart, EngineerWorkloadChart, TeamSplitChart } from '../components/charts'
-import { fmtMn } from '../data/opportunities'
+import { bestValue, fmtMn } from '../data/opportunities'
 import { useDataScope } from '../data/DataScopeContext'
 
 export default function Insights() {
-  const { stats: s, scope } = useDataScope()
+  const { opportunities, stats: s, scope } = useDataScope()
+  const dimo = opportunities.find((o) => o.customer.includes('DIMO'))
+  const dimoVal = dimo ? (bestValue(dimo) ?? 0) : 0
   const dimoShare = s.projectedPipeline
-    ? Math.round((2000 / s.projectedPipeline) * 100)
+    ? Math.round((dimoVal / s.projectedPipeline) * 100)
     : 0
 
   return (
@@ -24,7 +26,7 @@ export default function Insights() {
           label="Risks"
           body={
             scope === 'weekly'
-              ? `DIMO-EDL is ~${dimoShare}% of this week’s projected pipeline. ${s.pending.length} deals still open.`
+              ? `DIMO-EDL is ~${dimoShare}% of this week’s projected pipeline. BOC SD-WAN submission (06 Oct) passed with no outcome. ${s.pending.length} deals still open.`
               : `${s.stale.length} stale deals need reconfirmation. Concentration risk on large CICS opportunities (DIMO / NSBM).`
           }
         />
@@ -46,7 +48,8 @@ export default function Insights() {
         <ol className="mt-2 list-decimal space-y-1.5 pl-4 text-[13px] text-slate-600">
           <li>Record Won / Lost and opening price for every submitted bid.</li>
           <li>Reconfirm or close stale opportunities.</li>
-          <li>Track BOC SD-WAN (09 Oct) and DIMO-EDL (19 Nov) submission dates.</li>
+          <li>Confirm BOC SD-WAN outcome (due 06 Oct) and track DIMO-EDL (19 Nov).</li>
+          <li>Price Ceylon Steel Cisco SG350-28P replacement (4 units).</li>
         </ol>
       </Card>
     </div>

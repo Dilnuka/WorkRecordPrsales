@@ -30,26 +30,42 @@ export interface Opportunity {
   flag?: string
 }
 
-export const REPORT_DATE = new Date('2026-10-04')
-export const WEEKLY_COVERAGE = '28 Sep – 04 Oct 2026'
-export const OVERALL_COVERAGE = '16 Aug – 04 Oct 2026'
+export const REPORT_DATE = new Date('2026-10-11')
+export const WEEKLY_COVERAGE = '05 Oct – 11 Oct 2026'
+export const OVERALL_COVERAGE = '16 Aug – 11 Oct 2026'
 
-/** Latest weekly mail only (28 Sep – 04 Oct 2026) */
+/** Latest weekly mail only (05 Oct – 11 Oct 2026) */
 export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
   {
-    id: 'OP-026', team: 'CICS', customer: 'BOC (Bank of Ceylon)',
+    id: 'OP-029', team: 'CICS', customer: 'BOC (Bank of Ceylon)',
     project: 'Supply, delivery, installation, commissioning & maintenance of 366 network routers with SD-WAN (OPEX or CAPEX)',
     owner: 'Anuththara Wijebandara', sales: 'Malika Vishwajith', presalesEngineer: 'Pramoad Pathirathna',
-    budget: 55, projected: 45, bid: null, submissionDate: '2026-10-09', status: 'Ongoing',
-    outcome: null, lowestBid: null, lastReported: '2026-10-04', workDone: 'Complete project.',
+    budget: null, projected: null, bid: null, submissionDate: '2026-10-06', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-10-11', workDone: 'Project.',
+    flag: 'Submission date (06 Oct) has passed — outcome not reported',
   },
   {
-    id: 'OP-025', team: 'CICS', customer: 'DIMO-EDL',
+    id: 'OP-028', team: 'CICS', customer: 'DIMO-EDL',
     project: 'Proposed Rooftop Solar Aggregation & Virtual Net Metering Project',
     owner: 'Anuththara Wijebandara', sales: null, presalesEngineer: 'Sudeepa Premarathne',
-    budget: 4000, projected: 2000, bid: null, submissionDate: '2026-11-19', status: 'Ongoing',
-    outcome: null, lowestBid: null, lastReported: '2026-10-04', workDone: 'Complete pre-sales works.',
+    budget: null, projected: null, bid: 2400, submissionDate: '2026-11-19', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-10-11', workDone: 'Project.',
   },
+  {
+    id: 'OP-027', team: 'DWS', customer: 'Ceylon Steel Corporation Limited',
+    project: 'Get price for Cisco SG350-28P 28-port Switch — 04 Nos',
+    owner: 'Hiruni Amarakoon', sales: 'Chanaka Ekanayake', presalesEngineer: null,
+    budget: null, projected: null, bid: null, submissionDate: null, status: 'Assigned',
+    outcome: null, lowestBid: null, lastReported: '2026-10-11',
+    workDone: 'Get price for Replacement of Cisco SG350-28P 28-port Switch — 04 Nos.',
+  },
+]
+
+/**
+ * Prior opportunities still relevant overall.
+ * Superseded rows replaced by weekly IDs: OP-026→029, OP-025→028, OP-021→024, OP-020→023, OP-016→025.
+ */
+const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
   {
     id: 'OP-024', team: 'CICS', customer: 'BOC (Bank of Ceylon)',
     project: 'Data Lake Opportunity',
@@ -73,13 +89,6 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     budget: null, projected: 240, bid: 218, submissionDate: '2026-10-07', status: 'Submitted',
     outcome: null, lowestBid: null, lastReported: '2026-10-04', workDone: 'Complete project; bid dispatched.',
   },
-]
-
-/**
- * Prior opportunities (Aug–Sep) still relevant overall.
- * Superseded rows replaced by weekly IDs: OP-021→024, OP-020→023, OP-016→025.
- */
-const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
   { id: 'OP-019', team: 'CICS', customer: 'Innov8', project: 'Supply & Installation of Switch', owner: 'Anuththara Wijebandara', sales: 'Udara Fernando', presalesEngineer: 'Pramoad Pathirathna', budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing', outcome: null, lowestBid: null, lastReported: '2026-09-20', workDone: 'Project scoping in progress.' },
   { id: 'OP-018', team: 'DWS', customer: 'RIL Property PLC', project: 'Wireless Access Points — 4 Units', owner: 'Hiruni Amarakoon', sales: 'Nayomi Fernando', presalesEngineer: 'Hiruni Amarakoon', budget: null, projected: 0.28, bid: null, submissionDate: null, status: 'Ongoing', outcome: null, lowestBid: null, lastReported: '2026-09-20', workDone: 'Quotation requested for 4 wireless access points.' },
   { id: 'OP-017', team: 'CICS', customer: 'Brandix Apparel', project: 'Cisco AP', owner: 'Anuththara Wijebandara', sales: 'Tharushi Madushani', presalesEngineer: 'Anuththara Wijebandara', budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing', outcome: null, lowestBid: null, lastReported: '2026-09-14', workDone: 'Handling complete project.' },
@@ -109,6 +118,7 @@ export const PIPELINE_TREND = [
   { week: '14–20 Sep', value: 1500.28, reported: true },
   { week: '21–27 Sep', value: 1830, reported: true },
   { week: '28 Sep–4 Oct', value: 4115, reported: true },
+  { week: '5–11 Oct', value: 2400, reported: true },
 ]
 
 export function opportunitiesFor(scope: DataScope): Opportunity[] {
