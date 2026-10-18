@@ -95,15 +95,15 @@ export function TeamSplitChart() {
   const data = teams.map((t) => ({
     team: t,
     Pipeline: opportunities
-      .filter((o) => o.team === t && (o.status === 'Assigned' || o.status === 'Ongoing'))
-      .reduce((s, o) => s + (bestValue(o) ?? 0), 0),
+      .filter((o) => o.team === t)
+      .reduce((s, o) => s + (o.projected ?? 0), 0),
     Submitted: opportunities
-      .filter((o) => o.team === t && o.status === 'Submitted')
+      .filter((o) => o.team === t)
       .reduce((s, o) => s + (o.bid ?? 0), 0),
   }))
 
   return (
-    <ChartShell title="CICS vs DWS" subtitle="Active pipeline vs bids sent · Mn LKR">
+    <ChartShell title="CICS vs DWS" subtitle="Projected pipeline vs bid price · Mn LKR">
       <ResponsiveContainer width="100%" height={200}>
         <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }} barGap={4} barSize={28}>
           <CartesianGrid strokeDasharray="3 3" stroke={GRID} vertical={false} />
@@ -126,6 +126,7 @@ export function StatusMixChart() {
     { name: 'Assigned', value: opportunities.filter((o) => o.status === 'Assigned').length, color: BLUE },
     { name: 'Ongoing', value: opportunities.filter((o) => o.status === 'Ongoing').length, color: AMBER },
     { name: 'Submitted', value: stats.submitted.length, color: GREEN },
+    { name: 'Completed', value: stats.completed.length, color: SLATE },
     { name: 'Declined', value: stats.declined.length, color: RED },
   ].filter((d) => d.value > 0)
 
@@ -160,10 +161,11 @@ export function StageFunnelChart() {
     { stage: 'Assigned', n: opportunities.filter((o) => o.status === 'Assigned').length },
     { stage: 'Ongoing', n: opportunities.filter((o) => o.status === 'Ongoing').length },
     { stage: 'Submitted', n: opportunities.filter((o) => o.status === 'Submitted').length },
+    { stage: 'Completed', n: opportunities.filter((o) => o.status === 'Completed').length },
     { stage: 'Declined', n: opportunities.filter((o) => o.status === 'Declined').length },
   ]
   const max = Math.max(...counts.map((c) => c.n), 1)
-  const colors = [BLUE, AMBER, GREEN, RED]
+  const colors = [BLUE, AMBER, GREEN, SLATE, RED]
 
   return (
     <ChartShell title="Stage volume" subtitle="How many deals sit in each stage">

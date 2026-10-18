@@ -25,12 +25,14 @@ const STATUS_STYLES: Record<Status, string> = {
   Assigned: 'bg-blue-50 text-blue-700',
   Ongoing: 'bg-amber-50 text-amber-800',
   Submitted: 'bg-emerald-50 text-emerald-700',
+  Completed: 'bg-slate-100 text-slate-700',
   Declined: 'bg-red-50 text-red-700',
 }
 const STATUS_DOTS: Record<Status, string> = {
   Assigned: 'bg-blue-600',
   Ongoing: 'bg-amber-500',
   Submitted: 'bg-emerald-600',
+  Completed: 'bg-slate-700',
   Declined: 'bg-red-600',
 }
 

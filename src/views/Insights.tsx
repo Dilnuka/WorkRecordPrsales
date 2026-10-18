@@ -1,14 +1,12 @@
 import { Card } from '../components/ui'
 import { DataQualityChart, EngineerValueChart, EngineerWorkloadChart, TeamSplitChart } from '../components/charts'
-import { bestValue, fmtMn } from '../data/opportunities'
+import { fmtMn } from '../data/opportunities'
 import { useDataScope } from '../data/DataScopeContext'
 
 export default function Insights() {
-  const { opportunities, stats: s, scope } = useDataScope()
-  const dimo = opportunities.find((o) => o.customer.includes('DIMO'))
-  const dimoVal = dimo ? (bestValue(dimo) ?? 0) : 0
-  const dimoShare = s.projectedPipeline
-    ? Math.round((dimoVal / s.projectedPipeline) * 100)
+  const { stats: s, scope } = useDataScope()
+  const nsbmShare = s.projectedPipeline
+    ? Math.round((1500 / s.projectedPipeline) * 100)
     : 0
 
   return (
@@ -18,7 +16,7 @@ export default function Insights() {
           label="Summary"
           body={
             scope === 'weekly'
-              ? `This week: projected pipeline ${fmtMn(s.projectedPipeline)} Mn across ${s.total} opportunities. Bids dispatched ${fmtMn(s.submittedValue)} Mn.`
+              ? `This week: projected pipeline ${fmtMn(s.projectedPipeline)} Mn across ${s.total} opportunities. Bids dispatched ${fmtMn(s.submittedValue)} Mn. ${s.completed.length} completed.`
               : `Overall record: ${s.total} opportunities · projected ${fmtMn(s.projectedPipeline)} Mn · bids ${fmtMn(s.submittedValue)} Mn · ${s.pending.length} still pending.`
           }
         />
@@ -26,7 +24,7 @@ export default function Insights() {
           label="Risks"
           body={
             scope === 'weekly'
-              ? `DIMO-EDL is ~${dimoShare}% of this week’s projected pipeline. BOC SD-WAN submission (06 Oct) passed with no outcome. ${s.pending.length} deals still open.`
+              ? `NSBM is ~${nsbmShare}% of this week’s projected pipeline. EDL-DIMO holds a 2,500 Mn bid due 19 Nov. ${s.pending.length} deals still open.`
               : `${s.stale.length} stale deals need reconfirmation. Concentration risk on large CICS opportunities (DIMO / NSBM).`
           }
         />
@@ -47,9 +45,10 @@ export default function Insights() {
         <h3 className="text-[13px] font-semibold text-slate-900">Recommended actions</h3>
         <ol className="mt-2 list-decimal space-y-1.5 pl-4 text-[13px] text-slate-600">
           <li>Record Won / Lost and opening price for every submitted bid.</li>
-          <li>Reconfirm or close stale opportunities.</li>
-          <li>Confirm BOC SD-WAN outcome (due 06 Oct) and track DIMO-EDL (19 Nov).</li>
-          <li>Price Ceylon Steel Cisco SG350-28P replacement (4 units).</li>
+          <li>Track EDL-DIMO bid (2.5B) through 19 Nov submission.</li>
+          <li>Advance LECO Ekala SDMC solution/cost sheet (due 15 Oct).</li>
+          <li>Progress NSBM Healthcare ELV BOQs and Smart Nurse Call specifications.</li>
+          <li>Follow up BOC CMS Omni Pay discussion and Lankem lakehouse proposal.</li>
         </ol>
       </Card>
     </div>

@@ -3,10 +3,13 @@
  * WEEKLY = latest mail week only.
  * OVERALL = consolidated history + latest week (default for the live dashboard).
  * Values in Mn LKR. null = NI.
+ *
+ * Projected Pipeline = sum of Winning Price (projected).
+ * Bids Dispatched = sum of Bid Price (any stage with a quoted figure).
  */
 
 export type Team = 'CICS' | 'DWS' | 'NI'
-export type Status = 'Assigned' | 'Ongoing' | 'Submitted' | 'Declined'
+export type Status = 'Assigned' | 'Ongoing' | 'Submitted' | 'Completed' | 'Declined'
 export type Outcome = 'Won' | 'Lost' | null
 export type DataScope = 'overall' | 'weekly'
 
@@ -30,12 +33,96 @@ export interface Opportunity {
   flag?: string
 }
 
-export const REPORT_DATE = new Date('2026-10-11')
-export const WEEKLY_COVERAGE = '05 Oct – 11 Oct 2026'
-export const OVERALL_COVERAGE = '16 Aug – 11 Oct 2026'
+export const REPORT_DATE = new Date('2026-10-18')
+export const WEEKLY_COVERAGE = '12 Oct – 18 Oct 2026'
+export const OVERALL_COVERAGE = '16 Aug – 18 Oct 2026'
 
-/** Latest weekly mail only (05 Oct – 11 Oct 2026) */
+/** Latest weekly mail only (12 Oct – 18 Oct 2026) */
 export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
+  {
+    id: 'OP-039', team: 'CICS', customer: 'Department of Meteorology',
+    project: 'Procurement of Supply, Installation, Testing, Commissioning, and Maintenance of Upgraded Network Security, Switching, Wi-Fi, and Structured Cabling Systems',
+    owner: 'Hiruni Amarakoon', sales: 'Sithara Dissanayake', presalesEngineer: 'Ashen Alwis',
+    budget: 300, projected: 170, bid: null, submissionDate: '2026-09-22', status: 'Completed',
+    outcome: null, lowestBid: null, lastReported: '2026-10-18',
+    workDone: 'Finalize the documents and continue the project.',
+  },
+  {
+    id: 'OP-038', team: 'CICS', customer: 'Homelands',
+    project: 'Making the CISCO BOM — Central Park Boulevard',
+    owner: 'Anuththara Wijebandara', sales: null, presalesEngineer: 'Eranga Wijetilleka',
+    budget: null, projected: null, bid: null, submissionDate: '2026-10-15', status: 'Submitted',
+    outcome: null, lowestBid: null, lastReported: '2026-10-18', workDone: 'Making the CISCO BOM.',
+  },
+  {
+    id: 'OP-037', team: 'CICS', customer: 'Lanka Electricity Company (Private) Limited',
+    project: 'Supply, delivery, installation, configuration, testing and commissioning of network infrastructure at Ekala SDMC new building',
+    owner: 'Hiruni Amarakoon', sales: 'Thushara Bandaranayake', presalesEngineer: null,
+    budget: 50, projected: 35, bid: null, submissionDate: '2026-10-15', status: 'Assigned',
+    outcome: null, lowestBid: null, lastReported: '2026-10-18',
+    workDone: 'Make the solution and cost sheet.',
+  },
+  {
+    id: 'OP-036', team: 'CICS', customer: 'EDL-DIMO',
+    project: 'Proposed Rooftop Solar Aggregation & Virtual Net Metering Project',
+    owner: 'Anuththara Wijebandara', sales: 'Umesh Peiris', presalesEngineer: 'Sudeepa Premarathne',
+    budget: null, projected: null, bid: 2500, submissionDate: '2026-11-19', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-10-18', workDone: 'Project.',
+  },
+  {
+    id: 'OP-035', team: 'CICS', customer: 'NSBM Green University Town',
+    project: 'Data Network and ELV Network',
+    owner: 'Hiruni Amarakoon', sales: null, presalesEngineer: null,
+    budget: null, projected: 1500, bid: null, submissionDate: null, status: 'Completed',
+    outcome: null, lowestBid: null, lastReported: '2026-10-18',
+    workDone: 'Make a rough budget for entire project (supply, installation, configuration and testing) and make the spec.',
+  },
+  {
+    id: 'OP-034', team: 'CICS', customer: 'NSBM Healthcare Limited',
+    project: 'Data Network and ELV Network',
+    owner: 'Hiruni Amarakoon', sales: 'Kaushalya Hettiarachchi', presalesEngineer: 'Hiruni Amarakoon',
+    budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-10-18',
+    workDone: 'Prepare BOQs and technical specifications for the ELV systems.',
+  },
+  {
+    id: 'OP-033', team: 'CICS', customer: 'NSBM Green University',
+    project: 'Smart Nurse Call System',
+    owner: 'Hiruni Amarakoon', sales: 'Kaushalya Hettiarachchi', presalesEngineer: 'Hiruni Amarakoon',
+    budget: null, projected: null, bid: null, submissionDate: null, status: 'Assigned',
+    outcome: null, lowestBid: null, lastReported: '2026-10-18',
+    workDone: 'Preparing BOQ and specifications.',
+  },
+  {
+    id: 'OP-032', team: 'CICS', customer: 'Orient Insurance',
+    project: 'Network Device Replacement',
+    owner: 'Anuththara Wijebandara', sales: 'Chanaka Ekanayake', presalesEngineer: 'Didulani Wasalathilaka',
+    budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-10-18', workDone: 'Project.',
+  },
+  {
+    id: 'OP-031', team: 'CICS', customer: 'Lankem Ceylon PLC',
+    project: 'Data lakehouse based solutions',
+    owner: 'Dilnuka Liyanage', sales: null, presalesEngineer: 'Theekshana Tharunethu Wanniarachchi',
+    budget: null, projected: null, bid: null, submissionDate: null, status: 'Assigned',
+    outcome: null, lowestBid: null, lastReported: '2026-10-18',
+    workDone: 'Project proposal done with proposing solutions.',
+  },
+  {
+    id: 'OP-030', team: 'CICS', customer: 'BOC (Bank of Ceylon)',
+    project: 'BOC Centralized Card Management System (CMS) / Card Management System Modernization',
+    owner: 'Dilnuka Liyanage', sales: 'Malika Vishwajith', presalesEngineer: 'Theekshana Tharunethu Wanniarachchi',
+    budget: null, projected: null, bid: null, submissionDate: null, status: 'Assigned',
+    outcome: null, lowestBid: null, lastReported: '2026-10-18',
+    workDone: 'Visiting BOC head office for Omni Pay demo and presentation.',
+  },
+]
+
+/**
+ * Prior opportunities still relevant overall.
+ * Superseded: OP-028→036 (DIMO), OP-023→035 (NSBM), OP-015→039 (Meteorology).
+ */
+const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
   {
     id: 'OP-029', team: 'CICS', customer: 'BOC (Bank of Ceylon)',
     project: 'Supply, delivery, installation, commissioning & maintenance of 366 network routers with SD-WAN (OPEX or CAPEX)',
@@ -45,13 +132,6 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     flag: 'Submission date (06 Oct) has passed — outcome not reported',
   },
   {
-    id: 'OP-028', team: 'CICS', customer: 'DIMO-EDL',
-    project: 'Proposed Rooftop Solar Aggregation & Virtual Net Metering Project',
-    owner: 'Anuththara Wijebandara', sales: null, presalesEngineer: 'Sudeepa Premarathne',
-    budget: null, projected: null, bid: 2400, submissionDate: '2026-11-19', status: 'Ongoing',
-    outcome: null, lowestBid: null, lastReported: '2026-10-11', workDone: 'Project.',
-  },
-  {
     id: 'OP-027', team: 'DWS', customer: 'Ceylon Steel Corporation Limited',
     project: 'Get price for Cisco SG350-28P 28-port Switch — 04 Nos',
     owner: 'Hiruni Amarakoon', sales: 'Chanaka Ekanayake', presalesEngineer: null,
@@ -59,13 +139,6 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     outcome: null, lowestBid: null, lastReported: '2026-10-11',
     workDone: 'Get price for Replacement of Cisco SG350-28P 28-port Switch — 04 Nos.',
   },
-]
-
-/**
- * Prior opportunities still relevant overall.
- * Superseded rows replaced by weekly IDs: OP-026→029, OP-025→028, OP-021→024, OP-020→023, OP-016→025.
- */
-const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
   {
     id: 'OP-024', team: 'CICS', customer: 'BOC (Bank of Ceylon)',
     project: 'Data Lake Opportunity',
@@ -73,14 +146,6 @@ const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
     budget: null, projected: 330, bid: null, submissionDate: null, status: 'Assigned',
     outcome: null, lowestBid: null, lastReported: '2026-10-04',
     workDone: 'Data Lake to Data Warehouse process — technical requirements identifying.',
-  },
-  {
-    id: 'OP-023', team: 'CICS', customer: 'NSBM Green University Town',
-    project: 'Data Network and ELV Network',
-    owner: 'Hiruni Amarakoon', sales: null, presalesEngineer: null,
-    budget: null, projected: 1500, bid: null, submissionDate: null, status: 'Ongoing',
-    outcome: null, lowestBid: null, lastReported: '2026-10-04',
-    workDone: 'Rough budget for entire project (supply, installation, configuration, testing) and prepare the spec.',
   },
   {
     id: 'OP-022', team: 'DWS', customer: 'Hellman MAS',
@@ -92,7 +157,6 @@ const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
   { id: 'OP-019', team: 'CICS', customer: 'Innov8', project: 'Supply & Installation of Switch', owner: 'Anuththara Wijebandara', sales: 'Udara Fernando', presalesEngineer: 'Pramoad Pathirathna', budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing', outcome: null, lowestBid: null, lastReported: '2026-09-20', workDone: 'Project scoping in progress.' },
   { id: 'OP-018', team: 'DWS', customer: 'RIL Property PLC', project: 'Wireless Access Points — 4 Units', owner: 'Hiruni Amarakoon', sales: 'Nayomi Fernando', presalesEngineer: 'Hiruni Amarakoon', budget: null, projected: 0.28, bid: null, submissionDate: null, status: 'Ongoing', outcome: null, lowestBid: null, lastReported: '2026-09-20', workDone: 'Quotation requested for 4 wireless access points.' },
   { id: 'OP-017', team: 'CICS', customer: 'Brandix Apparel', project: 'Cisco AP', owner: 'Anuththara Wijebandara', sales: 'Tharushi Madushani', presalesEngineer: 'Anuththara Wijebandara', budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing', outcome: null, lowestBid: null, lastReported: '2026-09-14', workDone: 'Handling complete project.' },
-  { id: 'OP-015', team: 'CICS', customer: 'Department of Meteorology', project: 'Network Security, Switching, Wi-Fi & Structured Cabling', owner: 'Hiruni Amarakoon', sales: 'Sithara Dissanayake', presalesEngineer: 'Ashen Alwis', budget: 300, projected: 170, bid: null, submissionDate: '2026-09-22', status: 'Ongoing', outcome: null, lowestBid: null, lastReported: '2026-09-14', workDone: 'Finalising tender documents.', flag: 'Submission date (22 Sep) has passed — outcome not reported' },
   { id: 'OP-014', team: 'CICS', customer: 'CEB / NSO', project: 'Solar PV Field Communication Devices (Modems/RTU)', owner: 'Anuththara Wijebandara', sales: 'Thushara Bandaranayake', presalesEngineer: 'Anuththara Wijebandara', budget: null, projected: 50, bid: null, submissionDate: '2026-09-10', status: 'Declined', outcome: null, lowestBid: null, lastReported: '2026-09-08', workDone: 'No-bid recommended 08 Sep — fails 4 mandatory prequalification gates.' },
   { id: 'OP-013', team: 'CICS', customer: 'Govt. Tender L/0399/2026', project: 'Perimeter Firewall Solution (Supply, Install, Config, Support)', owner: 'Anuththara Wijebandara', sales: 'Hiruni Ranasinghe', presalesEngineer: 'Didulani Wasalathilaka', budget: null, projected: null, bid: null, submissionDate: null, status: 'Assigned', outcome: null, lowestBid: null, lastReported: '2026-09-06', workDone: 'Firewall compliance review; complete project assigned.' },
   { id: 'OP-012', team: 'DWS', customer: 'Berendina Micro Investments (BMIC)', project: 'Network Infrastructure & IT Security Enhancement (SASE)', owner: 'Hiruni Amarakoon', sales: 'Chamisha Dilakshi', presalesEngineer: 'Pramoad Pathirathna', budget: null, projected: 18, bid: 13.95, submissionDate: '2026-09-07', status: 'Submitted', outcome: null, lowestBid: null, lastReported: '2026-09-14', workDone: 'Solution for IT infrastructure upgrade and SASE; bid dispatched.' },
@@ -119,6 +183,7 @@ export const PIPELINE_TREND = [
   { week: '21–27 Sep', value: 1830, reported: true },
   { week: '28 Sep–4 Oct', value: 4115, reported: true },
   { week: '5–11 Oct', value: 2400, reported: true },
+  { week: '12–18 Oct', value: 1705, reported: true },
 ]
 
 export function opportunitiesFor(scope: DataScope): Opportunity[] {
@@ -134,6 +199,7 @@ export const bestValue = (o: Opportunity): number | null =>
 
 export const isStale = (o: Opportunity): boolean =>
   o.status !== 'Submitted' &&
+  o.status !== 'Completed' &&
   o.status !== 'Declined' &&
   (REPORT_DATE.getTime() - new Date(o.lastReported).getTime()) / 86_400_000 >= 14
 
@@ -163,13 +229,12 @@ export function engineerStats(list: Opportunity[]): EngineerStats[] {
   const names = [...new Set(list.map((o) => o.owner))]
   return names.map((name) => {
     const mine = list.filter((o) => o.owner === name)
-    const subs = mine.filter((o) => o.status === 'Submitted')
     return {
       name,
       worked: mine.length,
       pending: mine.filter((o) => o.status === 'Assigned' || o.status === 'Ongoing').length,
-      submitted: subs.length,
-      submittedValue: subs.reduce((s, o) => s + (o.bid ?? 0), 0),
+      submitted: mine.filter((o) => o.status === 'Submitted').length,
+      submittedValue: mine.reduce((s, o) => s + (o.bid ?? 0), 0),
       totalValue: mine.reduce((s, o) => s + (bestValue(o) ?? 0), 0),
       unsized: mine.filter((o) => bestValue(o) == null).length,
       wonDeals: mine.some((o) => o.outcome != null)
@@ -182,17 +247,21 @@ export function engineerStats(list: Opportunity[]): EngineerStats[] {
 export function summary(list: Opportunity[]) {
   const pending = list.filter((o) => o.status === 'Assigned' || o.status === 'Ongoing')
   const submitted = list.filter((o) => o.status === 'Submitted')
+  const completed = list.filter((o) => o.status === 'Completed')
   const declined = list.filter((o) => o.status === 'Declined')
-  const projectedPipeline = list.reduce((s, o) => s + (o.projected ?? o.bid ?? o.budget ?? 0), 0)
+  // Match weekly mail: Projected Pipeline = sum of Winning Price; Bids = sum of Bid Price
+  const projectedPipeline = list.reduce((s, o) => s + (o.projected ?? 0), 0)
+  const submittedValue = list.reduce((s, o) => s + (o.bid ?? 0), 0)
   return {
     pending,
     submitted,
+    completed,
     declined,
     stale: list.filter(isStale),
     unsized: list.filter((o) => bestValue(o) == null),
     pipelineValue: pending.reduce((s, o) => s + (bestValue(o) ?? 0), 0),
     projectedPipeline,
-    submittedValue: submitted.reduce((s, o) => s + (o.bid ?? 0), 0),
+    submittedValue,
     outcomesTracked: submitted.filter((o) => o.outcome != null).length,
     total: list.length,
   }

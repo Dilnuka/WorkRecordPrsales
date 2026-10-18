@@ -20,7 +20,12 @@ export default function Overview({ onOpenPipeline }: { onOpenPipeline: () => voi
     <div className="mx-auto max-w-[1120px] space-y-5">
       <section aria-label="Key metrics" className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-slate-200 bg-slate-200 sm:grid-cols-4">
         <Metric label="Pending" value={String(s.pending.length)} hint={`${assigned} assigned · ${ongoing} ongoing`} />
-        <Metric label="Submitted" value={String(s.submitted.length)} hint={`${fmtMn(s.submittedValue)} Mn bid value`} accent="text-emerald-700" />
+        <Metric
+          label="Submitted"
+          value={String(s.submitted.length)}
+          hint={`${fmtMn(s.submittedValue)} Mn bids · ${s.completed.length} completed`}
+          accent="text-emerald-700"
+        />
         <Metric
           label="Projected pipeline"
           value={fmtMn(s.projectedPipeline)}
@@ -58,10 +63,11 @@ export default function Overview({ onOpenPipeline }: { onOpenPipeline: () => voi
             Full board <ArrowRight size={13} aria-hidden />
           </button>
         </div>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
           <MiniLane title="Assigned" color="bg-blue-600" items={opportunities.filter((o) => o.status === 'Assigned')} />
           <MiniLane title="Ongoing" color="bg-amber-500" items={opportunities.filter((o) => o.status === 'Ongoing')} />
           <MiniLane title="Submitted" color="bg-emerald-600" items={opportunities.filter((o) => o.status === 'Submitted')} />
+          <MiniLane title="Completed" color="bg-slate-700" items={opportunities.filter((o) => o.status === 'Completed')} />
           <MiniLane title="Declined" color="bg-red-600" items={opportunities.filter((o) => o.status === 'Declined')} />
         </div>
       </section>

@@ -10,7 +10,9 @@ import { useDataScope } from '../data/DataScopeContext'
 type ViewMode = 'table' | 'board'
 
 const TEAM_ORDER: Record<Team, number> = { CICS: 0, DWS: 1, NI: 2 }
-const STATUS_ORDER: Record<Status, number> = { Submitted: 0, Ongoing: 1, Assigned: 2, Declined: 3 }
+const STATUS_ORDER: Record<Status, number> = {
+  Submitted: 0, Completed: 1, Ongoing: 2, Assigned: 3, Declined: 4,
+}
 
 export default function Pipeline() {
   const { opportunities } = useDataScope()
@@ -43,13 +45,13 @@ export default function Pipeline() {
   }, [opportunities, team, status, owner, query])
 
   const pendingN = rows.filter((o) => o.status === 'Assigned' || o.status === 'Ongoing').length
-  const doneN = rows.filter((o) => o.status === 'Submitted').length
+  const doneN = rows.filter((o) => o.status === 'Submitted' || o.status === 'Completed').length
 
   return (
     <div className="mx-auto max-w-[1280px] space-y-3">
       <div className="flex flex-wrap items-center gap-1.5">
         <span className="rounded-md bg-amber-50 px-2 py-0.5 text-[12px] font-medium text-amber-700">{pendingN} pending</span>
-        <span className="rounded-md bg-emerald-50 px-2 py-0.5 text-[12px] font-medium text-emerald-700">{doneN} submitted</span>
+        <span className="rounded-md bg-emerald-50 px-2 py-0.5 text-[12px] font-medium text-emerald-700">{doneN} done</span>
         <span className="text-[12px] text-slate-400">{rows.length} of {opportunities.length} shown</span>
       </div>
 
@@ -75,6 +77,7 @@ export default function Pipeline() {
           <option>Assigned</option>
           <option>Ongoing</option>
           <option>Submitted</option>
+          <option>Completed</option>
           <option>Declined</option>
         </FieldSelect>
         <FieldSelect value={owner} onChange={(e) => setOwner(e.target.value)} aria-label="Filter by engineer">
@@ -181,6 +184,7 @@ const LANES: { status: Status; title: string; accent: string }[] = [
   { status: 'Assigned', title: 'Assigned', accent: 'bg-[#3b6ae8]' },
   { status: 'Ongoing', title: 'Ongoing', accent: 'bg-[#e6a100]' },
   { status: 'Submitted', title: 'Submitted', accent: 'bg-[#1f8a4c]' },
+  { status: 'Completed', title: 'Completed', accent: 'bg-[#475569]' },
   { status: 'Declined', title: 'Declined', accent: 'bg-[#c9372c]' },
 ]
 
@@ -191,7 +195,7 @@ function BoardView({ rows }: { rows: Opportunity[] }) {
   }
 
   return (
-    <div className="stagger grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+    <div className="stagger grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-5">
       {LANES.map((lane) => {
         const items = rows.filter((o) => o.status === lane.status)
         return (
