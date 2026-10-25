@@ -33,12 +33,72 @@ export interface Opportunity {
   flag?: string
 }
 
-export const REPORT_DATE = new Date('2026-10-18')
-export const WEEKLY_COVERAGE = '12 Oct – 18 Oct 2026'
-export const OVERALL_COVERAGE = '16 Aug – 18 Oct 2026'
+export const REPORT_DATE = new Date('2026-10-25')
+export const WEEKLY_COVERAGE = '19 Oct – 25 Oct 2026'
+export const OVERALL_COVERAGE = '16 Aug – 25 Oct 2026'
 
-/** Latest weekly mail only (12 Oct – 18 Oct 2026) */
+/** Latest weekly mail only (19 Oct – 25 Oct 2026) */
 export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
+  {
+    id: 'OP-046', team: 'CICS', customer: 'Orient Insurance',
+    project: 'Supply of Cisco Switches',
+    owner: 'Anuththara Wijebandara', sales: 'Chanaka Ekanayake', presalesEngineer: 'Didulani Wasalathilaka',
+    budget: null, projected: null, bid: null, submissionDate: '2026-10-19', status: 'Submitted',
+    outcome: null, lowestBid: null, lastReported: '2026-10-25', workDone: 'Complete project.',
+  },
+  {
+    id: 'OP-045', team: 'CICS', customer: 'University of Peradeniya',
+    project: 'Supply, delivery, installation, and commissioning of network equipment for the rehabilitation of the computer network at the Faculty of Management (Cyclone Dithwa damage)',
+    owner: 'Hiruni Amarakoon', sales: 'Prasanna Pushpakumara', presalesEngineer: 'Dhanushka Hewawitharana',
+    budget: 45.9, projected: null, bid: null, submissionDate: '2026-10-26', status: 'Assigned',
+    outcome: null, lowestBid: null, lastReported: '2026-10-25',
+    workDone: 'Proposed the solution and costing.',
+  },
+  {
+    id: 'OP-044', team: 'CICS', customer: 'City of Dreams',
+    project: 'Supply of Cisco Switches and other infrastructure facilities',
+    owner: 'Anuththara Wijebandara', sales: 'Umesh Peiris', presalesEngineer: 'Pramoad Pathirathna',
+    budget: null, projected: null, bid: null, submissionDate: '2026-10-30', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-10-25', workDone: 'Complete project.',
+  },
+  {
+    id: 'OP-043', team: 'CICS', customer: 'EDL',
+    project: 'Proposed Rooftop Solar Aggregation & Virtual Net Metering Project',
+    owner: 'Anuththara Wijebandara', sales: 'Umesh Peiris', presalesEngineer: 'Sudeepa Premarathne',
+    budget: null, projected: 2300, bid: null, submissionDate: '2026-11-10', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-10-25',
+    workDone: 'Complete pre-sales work of the project.',
+  },
+  {
+    id: 'OP-042', team: 'DWS', customer: 'Compassion International Lanka',
+    project: 'Supply of Cisco Access Point',
+    owner: 'Anuththara Wijebandara', sales: 'Muditha Rajapaksha', presalesEngineer: null,
+    budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-10-25',
+    workDone: 'Make the Cisco BOM and get the pricing.',
+  },
+  {
+    id: 'OP-041', team: 'DWS', customer: 'Liberty Motor Associates (Pvt) Ltd.',
+    project: 'Supply equipment list',
+    owner: 'Hiruni Amarakoon', sales: 'Saleela Kaushal', presalesEngineer: 'Hiruni Amarakoon',
+    budget: null, projected: null, bid: null, submissionDate: '2026-10-21', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-10-25', workDone: 'Supply equipment list.',
+    flag: 'Submission date (21 Oct) has passed — still Ongoing',
+  },
+  {
+    id: 'OP-040', team: 'DWS', customer: 'SLT-PEOTV',
+    project: 'Procurement of Hardware and Services for HE IPTV CDN Expansion — SLTS/TB/PEOTV/2026/023',
+    owner: 'Anuththara Wijebandara', sales: 'Nayomi Fernando', presalesEngineer: 'Didulani Wasalathilaka',
+    budget: null, projected: null, bid: null, submissionDate: '2026-11-02', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-10-25', workDone: 'Complete project.',
+  },
+]
+
+/**
+ * Prior opportunities still relevant overall.
+ * Superseded: OP-036→043 (EDL), OP-032→046 (Orient), OP-028→036 (DIMO), OP-023→035 (NSBM), OP-015→039 (Meteorology).
+ */
+const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
   {
     id: 'OP-039', team: 'CICS', customer: 'Department of Meteorology',
     project: 'Procurement of Supply, Installation, Testing, Commissioning, and Maintenance of Upgraded Network Security, Switching, Wi-Fi, and Structured Cabling Systems',
@@ -61,13 +121,7 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     budget: 50, projected: 35, bid: null, submissionDate: '2026-10-15', status: 'Assigned',
     outcome: null, lowestBid: null, lastReported: '2026-10-18',
     workDone: 'Make the solution and cost sheet.',
-  },
-  {
-    id: 'OP-036', team: 'CICS', customer: 'EDL-DIMO',
-    project: 'Proposed Rooftop Solar Aggregation & Virtual Net Metering Project',
-    owner: 'Anuththara Wijebandara', sales: 'Umesh Peiris', presalesEngineer: 'Sudeepa Premarathne',
-    budget: null, projected: null, bid: 2500, submissionDate: '2026-11-19', status: 'Ongoing',
-    outcome: null, lowestBid: null, lastReported: '2026-10-18', workDone: 'Project.',
+    flag: 'Submission date (15 Oct) has passed — still Assigned',
   },
   {
     id: 'OP-035', team: 'CICS', customer: 'NSBM Green University Town',
@@ -94,13 +148,6 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     workDone: 'Preparing BOQ and specifications.',
   },
   {
-    id: 'OP-032', team: 'CICS', customer: 'Orient Insurance',
-    project: 'Network Device Replacement',
-    owner: 'Anuththara Wijebandara', sales: 'Chanaka Ekanayake', presalesEngineer: 'Didulani Wasalathilaka',
-    budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing',
-    outcome: null, lowestBid: null, lastReported: '2026-10-18', workDone: 'Project.',
-  },
-  {
     id: 'OP-031', team: 'CICS', customer: 'Lankem Ceylon PLC',
     project: 'Data lakehouse based solutions',
     owner: 'Dilnuka Liyanage', sales: null, presalesEngineer: 'Theekshana Tharunethu Wanniarachchi',
@@ -116,13 +163,6 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     outcome: null, lowestBid: null, lastReported: '2026-10-18',
     workDone: 'Visiting BOC head office for Omni Pay demo and presentation.',
   },
-]
-
-/**
- * Prior opportunities still relevant overall.
- * Superseded: OP-028→036 (DIMO), OP-023→035 (NSBM), OP-015→039 (Meteorology).
- */
-const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
   {
     id: 'OP-029', team: 'CICS', customer: 'BOC (Bank of Ceylon)',
     project: 'Supply, delivery, installation, commissioning & maintenance of 366 network routers with SD-WAN (OPEX or CAPEX)',
@@ -184,6 +224,7 @@ export const PIPELINE_TREND = [
   { week: '28 Sep–4 Oct', value: 4115, reported: true },
   { week: '5–11 Oct', value: 2400, reported: true },
   { week: '12–18 Oct', value: 1705, reported: true },
+  { week: '19–25 Oct', value: 2300, reported: true },
 ]
 
 export function opportunitiesFor(scope: DataScope): Opportunity[] {
