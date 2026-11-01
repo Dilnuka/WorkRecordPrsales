@@ -33,12 +33,107 @@ export interface Opportunity {
   flag?: string
 }
 
-export const REPORT_DATE = new Date('2026-10-25')
-export const WEEKLY_COVERAGE = '19 Oct – 25 Oct 2026'
-export const OVERALL_COVERAGE = '16 Aug – 25 Oct 2026'
+export const REPORT_DATE = new Date('2026-11-01')
+export const WEEKLY_COVERAGE = '26 Oct – 01 Nov 2026'
+export const OVERALL_COVERAGE = '16 Aug – 01 Nov 2026'
 
-/** Latest weekly mail only (19 Oct – 25 Oct 2026) */
+/** Latest weekly mail only (26 Oct – 01 Nov 2026) */
 export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
+  {
+    id: 'OP-057', team: 'DWS', customer: 'RIL Property PLC',
+    project: 'Requirement for Wireless Access Points — 04 Units',
+    owner: 'Hiruni Amarakoon', sales: 'Nayomi Fernando', presalesEngineer: null,
+    budget: null, projected: 0.28, bid: null, submissionDate: null, status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01',
+    workDone: 'Quotation requested for Wireless Access Points — 04 Units.',
+  },
+  {
+    id: 'OP-056', team: 'DWS', customer: 'Ceylon Steel Corporation Limited',
+    project: 'Get price for Cisco SG350-28P 28-port Switch — 04 Nos',
+    owner: 'Hiruni Amarakoon', sales: 'Chanaka Ekanayake', presalesEngineer: null,
+    budget: null, projected: null, bid: null, submissionDate: null, status: 'Assigned',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01',
+    workDone: 'Get price for Replacement of Cisco SG350-28P 28-port Switch — 04 Nos.',
+  },
+  {
+    id: 'OP-055', team: 'CICS', customer: 'NSBM Green University',
+    project: 'Smart Nurse Call System',
+    owner: 'Hiruni Amarakoon', sales: 'Kaushalya Hettiarachchi', presalesEngineer: null,
+    budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01',
+    workDone: 'Preparing BOQ and specifications.',
+  },
+  {
+    id: 'OP-054', team: 'CICS', customer: 'Farmchemie',
+    project: 'Storage for Dyvest Group CCTV footage',
+    owner: 'Hiruni Amarakoon', sales: 'Kovindu De Seram', presalesEngineer: 'Dexter de Lima',
+    budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01',
+    workDone: 'Propose a storage solution for Dyvest Group CCTV footage to meet the 90-day retention period.',
+  },
+  {
+    id: 'OP-053', team: 'NI', customer: 'Ceylon Steel Corporation Limited',
+    project: 'Get price for Cisco Switches — 04 Nos',
+    owner: 'Hiruni Amarakoon', sales: 'Chanaka Ekanayake', presalesEngineer: 'Didulani Wasalathilaka',
+    budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01',
+    workDone: 'Find a replacement model and get price for Cisco Switches — 04 Nos.',
+  },
+  {
+    id: 'OP-052', team: 'CICS', customer: 'NSBM Green University Town',
+    project: 'Data Network and ELV Network',
+    owner: 'Hiruni Amarakoon', sales: null, presalesEngineer: null,
+    budget: null, projected: 1500, bid: null, submissionDate: '2026-09-24', status: 'Completed',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01',
+    workDone: 'Make a rough budget for entire project (supply, installation, configuration and testing) and make the spec.',
+  },
+  {
+    id: 'OP-051', team: 'DWS', customer: 'Liberty Motor Associates (Pvt) Ltd.',
+    project: 'Supply equipment list',
+    owner: 'Hiruni Amarakoon', sales: 'Saleela Kaushal', presalesEngineer: null,
+    budget: null, projected: null, bid: 0.43, submissionDate: '2026-10-21', status: 'Submitted',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'Supply equipment list.',
+  },
+  {
+    id: 'OP-050', team: 'CICS', customer: 'University of Peradeniya',
+    project: 'Supply, delivery, installation, and commissioning of network equipment for the rehabilitation of the computer network at the Faculty of Management (Cyclone Dithwa damage)',
+    owner: 'Hiruni Amarakoon', sales: 'Prasanna Pushpakumara', presalesEngineer: 'Dhanushka Hewawitharana',
+    budget: 45.9, projected: null, bid: 22.3, submissionDate: '2026-10-26', status: 'Submitted',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01',
+    workDone: 'Proposed the solution and costing.',
+  },
+  {
+    id: 'OP-049', team: 'CICS', customer: 'NSBM Healthcare Limited',
+    project: 'Data Network and ELV Network',
+    owner: 'Hiruni Amarakoon', sales: 'Kaushalya Hettiarachchi', presalesEngineer: null,
+    budget: null, projected: null, bid: null, submissionDate: '2026-10-28', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01',
+    workDone: 'Prepare BOQs and technical specifications for the ELV systems.',
+    flag: 'Submission date (28 Oct) has passed — still Ongoing',
+  },
+  {
+    id: 'OP-048', team: 'DWS', customer: 'Activ8 Asia Pvt Ltd',
+    project: 'Activ8 Asia — Aruba Instant On Switches (Supply Only)',
+    owner: 'Dilnuka Liyanage', sales: 'Saleela Kaushal', presalesEngineer: 'Sudeepa Premarathne',
+    budget: null, projected: null, bid: 1.9, submissionDate: '2026-10-29', status: 'Submitted',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'Price request from Tyax.',
+  },
+  {
+    id: 'OP-047', team: 'DWS', customer: 'Equantum Outsourcing Innovation',
+    project: 'Firewall Renewal and the Replacement of the Fortigate 30E Devices',
+    owner: 'Hiruni Amarakoon', sales: 'Muditha Rajapaksha', presalesEngineer: 'Pramoad Pathirathna',
+    budget: null, projected: null, bid: 5.1, submissionDate: '2026-10-30', status: 'Submitted',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01',
+    workDone: 'Request pricing for the requirement.',
+  },
+]
+
+/**
+ * Prior opportunities still relevant overall.
+ * Superseded: OP-045→050 (Peradeniya), OP-041→051 (Liberty), OP-035→052 (NSBM),
+ * OP-034→049 (NSBM Healthcare), OP-033→055 (Nurse Call), OP-027→056 (Ceylon Steel), OP-018→057 (RIL).
+ */
+const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
   {
     id: 'OP-046', team: 'CICS', customer: 'Orient Insurance',
     project: 'Supply of Cisco Switches',
@@ -47,19 +142,12 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     outcome: null, lowestBid: null, lastReported: '2026-10-25', workDone: 'Complete project.',
   },
   {
-    id: 'OP-045', team: 'CICS', customer: 'University of Peradeniya',
-    project: 'Supply, delivery, installation, and commissioning of network equipment for the rehabilitation of the computer network at the Faculty of Management (Cyclone Dithwa damage)',
-    owner: 'Hiruni Amarakoon', sales: 'Prasanna Pushpakumara', presalesEngineer: 'Dhanushka Hewawitharana',
-    budget: 45.9, projected: null, bid: null, submissionDate: '2026-10-26', status: 'Assigned',
-    outcome: null, lowestBid: null, lastReported: '2026-10-25',
-    workDone: 'Proposed the solution and costing.',
-  },
-  {
     id: 'OP-044', team: 'CICS', customer: 'City of Dreams',
     project: 'Supply of Cisco Switches and other infrastructure facilities',
     owner: 'Anuththara Wijebandara', sales: 'Umesh Peiris', presalesEngineer: 'Pramoad Pathirathna',
     budget: null, projected: null, bid: null, submissionDate: '2026-10-30', status: 'Ongoing',
     outcome: null, lowestBid: null, lastReported: '2026-10-25', workDone: 'Complete project.',
+    flag: 'Submission date (30 Oct) has passed — still Ongoing',
   },
   {
     id: 'OP-043', team: 'CICS', customer: 'EDL',
@@ -78,27 +166,12 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     workDone: 'Make the Cisco BOM and get the pricing.',
   },
   {
-    id: 'OP-041', team: 'DWS', customer: 'Liberty Motor Associates (Pvt) Ltd.',
-    project: 'Supply equipment list',
-    owner: 'Hiruni Amarakoon', sales: 'Saleela Kaushal', presalesEngineer: 'Hiruni Amarakoon',
-    budget: null, projected: null, bid: null, submissionDate: '2026-10-21', status: 'Ongoing',
-    outcome: null, lowestBid: null, lastReported: '2026-10-25', workDone: 'Supply equipment list.',
-    flag: 'Submission date (21 Oct) has passed — still Ongoing',
-  },
-  {
     id: 'OP-040', team: 'DWS', customer: 'SLT-PEOTV',
     project: 'Procurement of Hardware and Services for HE IPTV CDN Expansion — SLTS/TB/PEOTV/2026/023',
     owner: 'Anuththara Wijebandara', sales: 'Nayomi Fernando', presalesEngineer: 'Didulani Wasalathilaka',
     budget: null, projected: null, bid: null, submissionDate: '2026-11-02', status: 'Ongoing',
     outcome: null, lowestBid: null, lastReported: '2026-10-25', workDone: 'Complete project.',
   },
-]
-
-/**
- * Prior opportunities still relevant overall.
- * Superseded: OP-036→043 (EDL), OP-032→046 (Orient), OP-028→036 (DIMO), OP-023→035 (NSBM), OP-015→039 (Meteorology).
- */
-const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
   {
     id: 'OP-039', team: 'CICS', customer: 'Department of Meteorology',
     project: 'Procurement of Supply, Installation, Testing, Commissioning, and Maintenance of Upgraded Network Security, Switching, Wi-Fi, and Structured Cabling Systems',
@@ -122,30 +195,6 @@ const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
     outcome: null, lowestBid: null, lastReported: '2026-10-18',
     workDone: 'Make the solution and cost sheet.',
     flag: 'Submission date (15 Oct) has passed — still Assigned',
-  },
-  {
-    id: 'OP-035', team: 'CICS', customer: 'NSBM Green University Town',
-    project: 'Data Network and ELV Network',
-    owner: 'Hiruni Amarakoon', sales: null, presalesEngineer: null,
-    budget: null, projected: 1500, bid: null, submissionDate: null, status: 'Completed',
-    outcome: null, lowestBid: null, lastReported: '2026-10-18',
-    workDone: 'Make a rough budget for entire project (supply, installation, configuration and testing) and make the spec.',
-  },
-  {
-    id: 'OP-034', team: 'CICS', customer: 'NSBM Healthcare Limited',
-    project: 'Data Network and ELV Network',
-    owner: 'Hiruni Amarakoon', sales: 'Kaushalya Hettiarachchi', presalesEngineer: 'Hiruni Amarakoon',
-    budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing',
-    outcome: null, lowestBid: null, lastReported: '2026-10-18',
-    workDone: 'Prepare BOQs and technical specifications for the ELV systems.',
-  },
-  {
-    id: 'OP-033', team: 'CICS', customer: 'NSBM Green University',
-    project: 'Smart Nurse Call System',
-    owner: 'Hiruni Amarakoon', sales: 'Kaushalya Hettiarachchi', presalesEngineer: 'Hiruni Amarakoon',
-    budget: null, projected: null, bid: null, submissionDate: null, status: 'Assigned',
-    outcome: null, lowestBid: null, lastReported: '2026-10-18',
-    workDone: 'Preparing BOQ and specifications.',
   },
   {
     id: 'OP-031', team: 'CICS', customer: 'Lankem Ceylon PLC',
@@ -172,14 +221,6 @@ const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
     flag: 'Submission date (06 Oct) has passed — outcome not reported',
   },
   {
-    id: 'OP-027', team: 'DWS', customer: 'Ceylon Steel Corporation Limited',
-    project: 'Get price for Cisco SG350-28P 28-port Switch — 04 Nos',
-    owner: 'Hiruni Amarakoon', sales: 'Chanaka Ekanayake', presalesEngineer: null,
-    budget: null, projected: null, bid: null, submissionDate: null, status: 'Assigned',
-    outcome: null, lowestBid: null, lastReported: '2026-10-11',
-    workDone: 'Get price for Replacement of Cisco SG350-28P 28-port Switch — 04 Nos.',
-  },
-  {
     id: 'OP-024', team: 'CICS', customer: 'BOC (Bank of Ceylon)',
     project: 'Data Lake Opportunity',
     owner: 'Dilnuka Liyanage', sales: 'Rukshan Perera', presalesEngineer: 'Dilnuka Liyanage',
@@ -195,7 +236,6 @@ const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
     outcome: null, lowestBid: null, lastReported: '2026-10-04', workDone: 'Complete project; bid dispatched.',
   },
   { id: 'OP-019', team: 'CICS', customer: 'Innov8', project: 'Supply & Installation of Switch', owner: 'Anuththara Wijebandara', sales: 'Udara Fernando', presalesEngineer: 'Pramoad Pathirathna', budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing', outcome: null, lowestBid: null, lastReported: '2026-09-20', workDone: 'Project scoping in progress.' },
-  { id: 'OP-018', team: 'DWS', customer: 'RIL Property PLC', project: 'Wireless Access Points — 4 Units', owner: 'Hiruni Amarakoon', sales: 'Nayomi Fernando', presalesEngineer: 'Hiruni Amarakoon', budget: null, projected: 0.28, bid: null, submissionDate: null, status: 'Ongoing', outcome: null, lowestBid: null, lastReported: '2026-09-20', workDone: 'Quotation requested for 4 wireless access points.' },
   { id: 'OP-017', team: 'CICS', customer: 'Brandix Apparel', project: 'Cisco AP', owner: 'Anuththara Wijebandara', sales: 'Tharushi Madushani', presalesEngineer: 'Anuththara Wijebandara', budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing', outcome: null, lowestBid: null, lastReported: '2026-09-14', workDone: 'Handling complete project.' },
   { id: 'OP-014', team: 'CICS', customer: 'CEB / NSO', project: 'Solar PV Field Communication Devices (Modems/RTU)', owner: 'Anuththara Wijebandara', sales: 'Thushara Bandaranayake', presalesEngineer: 'Anuththara Wijebandara', budget: null, projected: 50, bid: null, submissionDate: '2026-09-10', status: 'Declined', outcome: null, lowestBid: null, lastReported: '2026-09-08', workDone: 'No-bid recommended 08 Sep — fails 4 mandatory prequalification gates.' },
   { id: 'OP-013', team: 'CICS', customer: 'Govt. Tender L/0399/2026', project: 'Perimeter Firewall Solution (Supply, Install, Config, Support)', owner: 'Anuththara Wijebandara', sales: 'Hiruni Ranasinghe', presalesEngineer: 'Didulani Wasalathilaka', budget: null, projected: null, bid: null, submissionDate: null, status: 'Assigned', outcome: null, lowestBid: null, lastReported: '2026-09-06', workDone: 'Firewall compliance review; complete project assigned.' },
@@ -225,6 +265,7 @@ export const PIPELINE_TREND = [
   { week: '5–11 Oct', value: 2400, reported: true },
   { week: '12–18 Oct', value: 1705, reported: true },
   { week: '19–25 Oct', value: 2300, reported: true },
+  { week: '26 Oct–1 Nov', value: 1500.28, reported: true },
 ]
 
 export function opportunitiesFor(scope: DataScope): Opportunity[] {
