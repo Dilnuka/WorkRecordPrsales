@@ -27,7 +27,7 @@ export default function Insights() {
           label="Risks"
           body={
             scope === 'weekly'
-              ? `NSBM is ~${nsbmShare}% of this week’s projected pipeline. Bids dispatched ${fmtMn(s.submittedValue)} Mn across ${s.submitted.length} submissions. ${s.pending.length} deals still open.`
+              ? `NSBM is ~${nsbmShare}% of this week’s projected pipeline. EDL holds a 2,000 Mn bid due 6 Nov. ${s.pending.length} deals still open.`
               : `${s.stale.length} stale deals need reconfirmation. Concentration risk on large CICS opportunities (EDL / NSBM).`
           }
         />
@@ -51,7 +51,7 @@ export default function Insights() {
           <li>Advance NSBM Healthcare ELV BOQs (due 28 Oct, still Ongoing) and the Smart Nurse Call specification.</li>
           <li>Price both Ceylon Steel switch requests and close the RIL wireless AP quotation (0.28 Mn).</li>
           <li>Propose Farmchemie / Dyvest CCTV storage for the 90-day retention requirement.</li>
-          <li>Track EDL rooftop solar (2.3B projected) through 10 Nov on the overall record.</li>
+          <li>Track the EDL rooftop solar bid (2,000 Mn) through 6 Nov.</li>
         </ol>
       </Card>
     </div>

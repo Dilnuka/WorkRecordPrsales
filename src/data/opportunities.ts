@@ -72,7 +72,7 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     workDone: 'Propose a storage solution for Dyvest Group CCTV footage to meet the 90-day retention period.',
   },
   {
-    id: 'OP-053', team: 'NI', customer: 'Ceylon Steel Corporation Limited',
+    id: 'OP-053', team: 'CICS', customer: 'Ceylon Steel Corporation Limited',
     project: 'Get price for Cisco Switches — 04 Nos',
     owner: 'Hiruni Amarakoon', sales: 'Chanaka Ekanayake', presalesEngineer: 'Didulani Wasalathilaka',
     budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing',
@@ -103,6 +103,28 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     workDone: 'Proposed the solution and costing.',
   },
   {
+    id: 'OP-058', team: 'CICS', customer: 'VarioSystem',
+    project: 'Supplying and installing Cisco Switches',
+    owner: 'Anuththara Wijebandara', sales: 'Udara Fernando', presalesEngineer: 'Didulani Wasalathilaka',
+    budget: null, projected: null, bid: null, submissionDate: '2026-10-28', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'Making the Cisco BOM.',
+    flag: 'Submission date (28 Oct) has passed — still Ongoing',
+  },
+  {
+    id: 'OP-059', team: 'CICS', customer: 'LankaCom',
+    project: 'Supplying and installing Cisco Router',
+    owner: 'Anuththara Wijebandara', sales: 'Thushara Bandaranayake', presalesEngineer: 'Didulani Wasalathilaka',
+    budget: null, projected: null, bid: null, submissionDate: '2026-10-30', status: 'Submitted',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'Making the Cisco BOM.',
+  },
+  {
+    id: 'OP-060', team: 'CICS', customer: 'EDL',
+    project: 'Proposed Rooftop Solar Aggregation & Virtual Net Metering Project',
+    owner: 'Anuththara Wijebandara', sales: 'Umesh Peiris', presalesEngineer: 'Sudeepa Premarathne',
+    budget: null, projected: null, bid: 2000, submissionDate: '2026-11-06', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'NI',
+  },
+  {
     id: 'OP-049', team: 'CICS', customer: 'NSBM Healthcare Limited',
     project: 'Data Network and ELV Network',
     owner: 'Hiruni Amarakoon', sales: 'Kaushalya Hettiarachchi', presalesEngineer: null,
@@ -126,11 +148,18 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     outcome: null, lowestBid: null, lastReported: '2026-11-01',
     workDone: 'Request pricing for the requirement.',
   },
+  {
+    id: 'OP-061', team: 'DWS', customer: 'SLT',
+    project: 'SLTS/TB/PEOTV/2026/024 — Procurement of Equipment for IPTV BCP Operations Setup',
+    owner: 'Anuththara Wijebandara', sales: 'Nayomi Fernando', presalesEngineer: 'Didulani Wasalathilaka',
+    budget: null, projected: null, bid: null, submissionDate: '2026-10-30', status: 'Submitted',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'NI',
+  },
 ]
 
 /**
  * Prior opportunities still relevant overall.
- * Superseded: OP-045→050 (Peradeniya), OP-041→051 (Liberty), OP-035→052 (NSBM),
+ * Superseded: OP-043→060 (EDL), OP-045→050 (Peradeniya), OP-041→051 (Liberty), OP-035→052 (NSBM),
  * OP-034→049 (NSBM Healthcare), OP-033→055 (Nurse Call), OP-027→056 (Ceylon Steel), OP-018→057 (RIL).
  */
 const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
@@ -148,14 +177,6 @@ const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
     budget: null, projected: null, bid: null, submissionDate: '2026-10-30', status: 'Ongoing',
     outcome: null, lowestBid: null, lastReported: '2026-10-25', workDone: 'Complete project.',
     flag: 'Submission date (30 Oct) has passed — still Ongoing',
-  },
-  {
-    id: 'OP-043', team: 'CICS', customer: 'EDL',
-    project: 'Proposed Rooftop Solar Aggregation & Virtual Net Metering Project',
-    owner: 'Anuththara Wijebandara', sales: 'Umesh Peiris', presalesEngineer: 'Sudeepa Premarathne',
-    budget: null, projected: 2300, bid: null, submissionDate: '2026-11-10', status: 'Ongoing',
-    outcome: null, lowestBid: null, lastReported: '2026-10-25',
-    workDone: 'Complete pre-sales work of the project.',
   },
   {
     id: 'OP-042', team: 'DWS', customer: 'Compassion International Lanka',
