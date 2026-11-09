@@ -33,12 +33,66 @@ export interface Opportunity {
   flag?: string
 }
 
-export const REPORT_DATE = new Date('2026-11-01')
-export const WEEKLY_COVERAGE = '26 Oct – 01 Nov 2026'
-export const OVERALL_COVERAGE = '16 Aug – 01 Nov 2026'
+export const REPORT_DATE = new Date('2026-11-08')
+export const WEEKLY_COVERAGE = '02 Nov – 08 Nov 2026'
+export const OVERALL_COVERAGE = '16 Aug – 08 Nov 2026'
 
-/** Latest weekly mail only (26 Oct – 01 Nov 2026) */
+/** Latest weekly mail only (02 Nov – 08 Nov 2026) */
 export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
+  {
+    id: 'OP-064', team: 'CICS', customer: 'EDL',
+    project: 'Proposed Rooftop Solar Aggregation & Virtual Net Metering Project',
+    owner: 'Anuththara Wijebandara', sales: 'Umesh Peiris', presalesEngineer: 'Sudeepa Premarathne',
+    budget: 2000, projected: null, bid: 1400, submissionDate: '2026-11-09', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-11-08',
+    workDone: 'Complete pre-sales scope.',
+  },
+  {
+    id: 'OP-063', team: 'CICS', customer: 'Department of Meteorology',
+    project: 'Procurement of supply, installation, testing, commissioning, and maintenance of upgraded network security, network access control and network monitoring',
+    owner: 'Hiruni Amarakoon', sales: 'Sithara Dissanayake', presalesEngineer: 'Ashen Alwis',
+    budget: 250, projected: null, bid: null, submissionDate: '2026-11-18', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-11-08', workDone: 'Complete project.',
+  },
+  {
+    id: 'OP-062', team: 'DWS', customer: 'Ceylon Steel Corporation Limited',
+    project: 'Get price for Cisco Switches — 04 Nos',
+    owner: 'Hiruni Amarakoon', sales: 'Chanaka Ekanayake', presalesEngineer: 'Didulani Wasalathilaka',
+    budget: null, projected: null, bid: null, submissionDate: null, status: 'Submitted',
+    outcome: null, lowestBid: null, lastReported: '2026-11-08',
+    workDone: 'Find a replacement model and get price for Cisco Switches — 04 Nos.',
+  },
+]
+
+/**
+ * Prior opportunities still relevant overall.
+ * Superseded: OP-060→064 (EDL), OP-053→062 (Ceylon Steel), OP-043→060 (EDL), OP-045→050 (Peradeniya),
+ * OP-041→051 (Liberty), OP-035→052 (NSBM), OP-034→049 (NSBM Healthcare), OP-033→055 (Nurse Call),
+ * OP-027→056 (Ceylon Steel SG350), OP-018→057 (RIL).
+ */
+const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
+  {
+    id: 'OP-061', team: 'DWS', customer: 'SLT',
+    project: 'SLTS/TB/PEOTV/2026/024 — Procurement of Equipment for IPTV BCP Operations Setup',
+    owner: 'Anuththara Wijebandara', sales: 'Nayomi Fernando', presalesEngineer: 'Didulani Wasalathilaka',
+    budget: null, projected: null, bid: null, submissionDate: '2026-10-30', status: 'Submitted',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'NI',
+  },
+  {
+    id: 'OP-059', team: 'CICS', customer: 'LankaCom',
+    project: 'Supplying and installing Cisco Router',
+    owner: 'Anuththara Wijebandara', sales: 'Thushara Bandaranayake', presalesEngineer: 'Didulani Wasalathilaka',
+    budget: null, projected: null, bid: null, submissionDate: '2026-10-30', status: 'Submitted',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'Making the Cisco BOM.',
+  },
+  {
+    id: 'OP-058', team: 'CICS', customer: 'VarioSystem',
+    project: 'Supplying and installing Cisco Switches',
+    owner: 'Anuththara Wijebandara', sales: 'Udara Fernando', presalesEngineer: 'Didulani Wasalathilaka',
+    budget: null, projected: null, bid: null, submissionDate: '2026-10-28', status: 'Ongoing',
+    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'Making the Cisco BOM.',
+    flag: 'Submission date (28 Oct) has passed — still Ongoing',
+  },
   {
     id: 'OP-057', team: 'DWS', customer: 'RIL Property PLC',
     project: 'Requirement for Wireless Access Points — 04 Units',
@@ -72,14 +126,6 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     workDone: 'Propose a storage solution for Dyvest Group CCTV footage to meet the 90-day retention period.',
   },
   {
-    id: 'OP-053', team: 'CICS', customer: 'Ceylon Steel Corporation Limited',
-    project: 'Get price for Cisco Switches — 04 Nos',
-    owner: 'Hiruni Amarakoon', sales: 'Chanaka Ekanayake', presalesEngineer: 'Didulani Wasalathilaka',
-    budget: null, projected: null, bid: null, submissionDate: null, status: 'Ongoing',
-    outcome: null, lowestBid: null, lastReported: '2026-11-01',
-    workDone: 'Find a replacement model and get price for Cisco Switches — 04 Nos.',
-  },
-  {
     id: 'OP-052', team: 'CICS', customer: 'NSBM Green University Town',
     project: 'Data Network and ELV Network',
     owner: 'Hiruni Amarakoon', sales: null, presalesEngineer: null,
@@ -101,28 +147,6 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     budget: 45.9, projected: null, bid: 22.3, submissionDate: '2026-10-26', status: 'Submitted',
     outcome: null, lowestBid: null, lastReported: '2026-11-01',
     workDone: 'Proposed the solution and costing.',
-  },
-  {
-    id: 'OP-058', team: 'CICS', customer: 'VarioSystem',
-    project: 'Supplying and installing Cisco Switches',
-    owner: 'Anuththara Wijebandara', sales: 'Udara Fernando', presalesEngineer: 'Didulani Wasalathilaka',
-    budget: null, projected: null, bid: null, submissionDate: '2026-10-28', status: 'Ongoing',
-    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'Making the Cisco BOM.',
-    flag: 'Submission date (28 Oct) has passed — still Ongoing',
-  },
-  {
-    id: 'OP-059', team: 'CICS', customer: 'LankaCom',
-    project: 'Supplying and installing Cisco Router',
-    owner: 'Anuththara Wijebandara', sales: 'Thushara Bandaranayake', presalesEngineer: 'Didulani Wasalathilaka',
-    budget: null, projected: null, bid: null, submissionDate: '2026-10-30', status: 'Submitted',
-    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'Making the Cisco BOM.',
-  },
-  {
-    id: 'OP-060', team: 'CICS', customer: 'EDL',
-    project: 'Proposed Rooftop Solar Aggregation & Virtual Net Metering Project',
-    owner: 'Anuththara Wijebandara', sales: 'Umesh Peiris', presalesEngineer: 'Sudeepa Premarathne',
-    budget: null, projected: null, bid: 2000, submissionDate: '2026-11-06', status: 'Ongoing',
-    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'NI',
   },
   {
     id: 'OP-049', team: 'CICS', customer: 'NSBM Healthcare Limited',
@@ -148,21 +172,6 @@ export const WEEKLY_OPPORTUNITIES: Opportunity[] = [
     outcome: null, lowestBid: null, lastReported: '2026-11-01',
     workDone: 'Request pricing for the requirement.',
   },
-  {
-    id: 'OP-061', team: 'DWS', customer: 'SLT',
-    project: 'SLTS/TB/PEOTV/2026/024 — Procurement of Equipment for IPTV BCP Operations Setup',
-    owner: 'Anuththara Wijebandara', sales: 'Nayomi Fernando', presalesEngineer: 'Didulani Wasalathilaka',
-    budget: null, projected: null, bid: null, submissionDate: '2026-10-30', status: 'Submitted',
-    outcome: null, lowestBid: null, lastReported: '2026-11-01', workDone: 'NI',
-  },
-]
-
-/**
- * Prior opportunities still relevant overall.
- * Superseded: OP-043→060 (EDL), OP-045→050 (Peradeniya), OP-041→051 (Liberty), OP-035→052 (NSBM),
- * OP-034→049 (NSBM Healthcare), OP-033→055 (Nurse Call), OP-027→056 (Ceylon Steel), OP-018→057 (RIL).
- */
-const HISTORICAL_OPPORTUNITIES: Opportunity[] = [
   {
     id: 'OP-046', team: 'CICS', customer: 'Orient Insurance',
     project: 'Supply of Cisco Switches',
@@ -287,6 +296,7 @@ export const PIPELINE_TREND = [
   { week: '12–18 Oct', value: 1705, reported: true },
   { week: '19–25 Oct', value: 2300, reported: true },
   { week: '26 Oct–1 Nov', value: 1500.28, reported: true },
+  { week: '2–8 Nov', value: 0, reported: true },
 ]
 
 export function opportunitiesFor(scope: DataScope): Opportunity[] {

@@ -4,13 +4,7 @@ import { fmtMn } from '../data/opportunities'
 import { useDataScope } from '../data/DataScopeContext'
 
 export default function Insights() {
-  const { opportunities, stats: s, scope } = useDataScope()
-  const nsbmProjected = opportunities
-    .filter((o) => o.customer.toUpperCase().includes('NSBM'))
-    .reduce((sum, o) => sum + (o.projected ?? 0), 0)
-  const nsbmShare = s.projectedPipeline
-    ? Math.round((nsbmProjected / s.projectedPipeline) * 100)
-    : 0
+  const { stats: s, scope } = useDataScope()
 
   return (
     <div className="mx-auto max-w-[1120px] space-y-5">
@@ -27,7 +21,7 @@ export default function Insights() {
           label="Risks"
           body={
             scope === 'weekly'
-              ? `NSBM is ~${nsbmShare}% of this week’s projected pipeline. EDL holds a 2,000 Mn bid due 6 Nov. ${s.pending.length} deals still open.`
+              ? `No projected sizing this week. EDL holds a 1,400 Mn bid (budget 2,000 Mn) due 9 Nov. Meteorology tender due 18 Nov. ${s.pending.length} deals still open.`
               : `${s.stale.length} stale deals need reconfirmation. Concentration risk on large CICS opportunities (EDL / NSBM).`
           }
         />
@@ -47,11 +41,10 @@ export default function Insights() {
       <Card className="p-4">
         <h3 className="text-[13px] font-semibold text-slate-900">Recommended actions</h3>
         <ol className="mt-2 list-decimal space-y-1.5 pl-4 text-[13px] text-slate-600">
-          <li>Record Won / Lost for submitted bids: Peradeniya 22.3 Mn, Equantum 5.1 Mn, Activ8 1.9 Mn, and Liberty 0.43 Mn.</li>
-          <li>Advance NSBM Healthcare ELV BOQs (due 28 Oct, still Ongoing) and the Smart Nurse Call specification.</li>
-          <li>Price both Ceylon Steel switch requests and close the RIL wireless AP quotation (0.28 Mn).</li>
-          <li>Propose Farmchemie / Dyvest CCTV storage for the 90-day retention requirement.</li>
-          <li>Track the EDL rooftop solar bid (2,000 Mn) through 6 Nov.</li>
+          <li>Track EDL rooftop solar bid (1,400 Mn against 2,000 Mn budget) through 9 Nov submission.</li>
+          <li>Progress Department of Meteorology NAC / monitoring tender (budget 250 Mn) toward 18 Nov.</li>
+          <li>Record Won / Lost and opening price for Ceylon Steel Cisco switch submission.</li>
+          <li>Capture projected sizing where still NI so pipeline totals are not blank.</li>
         </ol>
       </Card>
     </div>
